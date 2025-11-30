@@ -1,0 +1,21 @@
+메서드 호출
+public static 타입 메서드명(argument1, argument2){
+	**타입이 void가 아니라면 해당 타입으로 return 해줘야함
+}
+	종류
+		void : 리턴값이 없기때문에 메서드명으로 호출만 하면됨
+		이외 타입 : 리턴값을 받을 변수가 필요함
+
+값에 의한 호출
+	호출문
+		메서드명(actual parameter);
+
+	호출된 메서드
+		public static void 메서드명(formal parameter){
+			...
+		}
+=> formal parameter는 단지 actual parameter를 복사한 것이기 때문에 swap 함수가 실행되어도 main함수에 영향을 주지 못함
+	**두 파라미터는 별개의 변수임
+	**C언어에선 &변수 형식을 이용한 참조에 의한 호출을 통해 값을 변경할 수 있지만 Java는 불가능
+BUT, 배열은 이러한 값에 의한 호출의 예외임 => 값의 변경이 이루어짐 
+=> 프리미티브 타입이 아닌 객체는 영향을 받음(byte, long, float, double, boolean, char 등)
