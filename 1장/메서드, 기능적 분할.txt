@@ -19,3 +19,35 @@ public static 타입 메서드명(argument1, argument2){
 	**C언어에선 &변수 형식을 이용한 참조에 의한 호출을 통해 값을 변경할 수 있지만 Java는 불가능
 BUT, 배열은 이러한 값에 의한 호출의 예외임 => 값의 변경이 이루어짐 
 => 프리미티브 타입이 아닌 객체는 영향을 받음(byte, long, float, double, boolean, char 등)
+
+**두 개 이상의 메서드에서 모두 사용하는 변수의 경우 클래스 멤버 변수(static 타입)으로 만들 수 있음ㄴ
+
+파일을 통한 코드 실행
+: 기존 Scanner 객체에서 사용된 System.in(키보드) 대신 파일명.txt 를 넣어 코드를 실행함
+	**이때 파일은 프로젝트 내에 존재해야함
+	형식:
+	import java.io.File;
+	...
+	try
+		Scanner inFile = new Scanner(new File(파일명));	// 이때 파일명은 String이면 되므로 따로 String 변수에 파일명을 저장해 대신 넣어도됨
+	catch(FileNotFoundException e){
+		...
+	}
+
+**Unhandled exception type FileNotFoundException: 파일이 발견되지 않는 예외를 지정해주지 않아 발생한 오류
+	=> try 안에 해당 구문을 넣고 catch 부문에는 해당 예외가 발생했을 때 파일 발견하지 못함 식으로 종료하도록 만들면 됨
+
+hasNext() : C언어의 EOF 역할을 함
+문자열 비교
+	A.equals(B) : A와 B 일치 여부 확인함	
+	A.compareTo(B) : 
+		1. 양수 반환 : A가 B보다 큼
+		2. 0 반환 : A와 B가 같음
+		3. 음수 반환 : A가 B보다 작음
+		**헷갈리므로 A를 기준으로 부등호 방향이 같다고 기억하면 됨
+	A.compareToIgnoreCase(B) : 대소문자 구분없이 문자열 대소를 비교함
+
+
+
+**교훈
+: 컴퓨터는 빠르다. 뭔가 교묘한 방법을 찾으려 하지 말고 무식하지만 논리적으로 가장 명료한 방법을 찾아라. 그런 다음 어떻게 개선할 수 있는지 고민하라.

@@ -1,0 +1,33 @@
+String클래스 기본 메서드
+	문자열 동일성 검사: A.equals(B)
+
+	문자열 사전식 순서: A.compareTo(B)
+		**A > B : 양수 반환 | A == B : 0 반환 | A < B : 음수 반환
+		**C언어와 마찬가지로 == 등 부호로 문자열 비교 불가함
+		**But, assignment(=)로 문자열 복사 가능
+
+	문자열 대소문자 상관없이 사전식 순서 : A.compareToIgnoreCase(B)
+
+	문자열 길이: A.length => A 객체의 길이 반환
+
+	특정 위치의 문자: A.charAt(위치값) => A에서 위치값 번째 문자 반환
+
+	지정한 문자의 위치 검색: A.indexOf(문자열) => A에서 문자열이 존재하는 위치값 반환
+
+	지정된 범위의 부분 문자열: A.substring(숫자1, 숫자2) => A객체에서 숫자1번째부터 숫자2번째까지의 문자열 반환
+		**이때 정확한 범위는 "숫자1 이상 숫자2보다 작음" 이므로 주의해야함
+
+	대문자 -> 소문자로 변경 : A.toLowerCase()
+
+PrintWriter
+: 클래스 멤버 함수를 통해 파일 내용을 추가할 수 있음
+	형식
+	PrintWriter outFile = new PrintWriter(new File(filename));
+	...
+	outFile.close();
+
+	A.println("문자열") : 객체가 지정한 파일에 내용을 추가할 수 있음
+
+Character 클래스
+	A.isLetter(대상) : 대상이 문자열인지 판별함
+		**charAt(숫자)를 활용해 문자열 여부를 판별하도록 만들 수 있음 
