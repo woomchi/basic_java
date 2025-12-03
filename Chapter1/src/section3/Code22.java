@@ -1,3 +1,5 @@
+package section3;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,15 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Code23 {
+public class Code22 {
 
 	static String [] words = new String[100000];
 	static int [] count = new int[100000];
 	static int n = 0;
 	
 	public static void main(String[] args) {
-		// 단어 안에 특수기호, 숫자가 포함되어 이를 개선하는 버전
-		// + 대소문자 구별없이 목록에 저장
 		Scanner kb = new Scanner(System.in);
 		while(true) {	//무한 루프
 			
@@ -48,12 +48,8 @@ public class Code23 {
 			
 			while(inFile.hasNext()) {	//입력 데이터가 없을 때까지
 				String str = inFile.next();
-				String trimmed = trimming(str);
-				// 문자열이 없다고 판별되어 null이 반환되기도 하므로 null이 아닌 경우에만 addWord가 이루어져야함
-				if(trimmed != null) {
-					String t= trimmed.toLowerCase();
-					addWord(t);					
-				}
+				
+				addWord(str);
 				
 			}
 			
@@ -66,19 +62,11 @@ public class Code23 {
 	}
 	public static void addWord(String str) {
 		int index = findWord(str);	// returns -1 if not found
-		
-		
 		if(index != -1) {	//found words[index] == str
 			count[index]++;
 		}else {
-			int i=n-1;
-			while(i>=0&&words[i].compareToIgnoreCase(str) > 0) {
-				words[i+1] = words[i];
-				count[i+1] = count[i];
-				i--;
-			}
-			words[i+1] = str;
-			count[i+1] = 1;
+			words[n] = str;
+			count[n] = 1;
 			n++;
 		}
 	}
@@ -103,24 +91,5 @@ public class Code23 {
 		} catch (IOException e) {
 			System.out.println("Save failed. Don't ask me why!");
 		}
-	}
-	public static String trimming(String str) {
-		if(str==null || str.length()<=0) {
-			return null;
-		}
-		int i=0, j=str.length()-1;
-		while(i <= str.length()-1 && !Character.isLetter(str.charAt(i))) {
-			i++;
-		}
-		while(j>=0 && !Character.isLetter(str.charAt(j))) {
-			j--;
-		}
-		
-		//System.out.println(str + ":"+i+":"+j);
-		//문자열 안에 알파벳이 하나도 없는 경우에는 i가 j보다 커지므로 StringIndexOutOfBoundsException이 발생함
-		if(i>j) {
-			return null;
-		}
-		return str.substring(i,j+1);
 	}
 }
