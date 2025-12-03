@@ -1,3 +1,5 @@
+package section1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,10 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Code23 {
+public class IndexMaker {
 
-	static String [] words = new String[100000];
-	static int [] count = new int[100000];
+//	static String [] words = new String[100000];
+//	static int [] count = new int[100000];
+	static Item [] items = new Item [1000];
 	static int n = 0;
 	
 	public static void main(String[] args) {
@@ -26,7 +29,7 @@ public class Code23 {
 				String str = kb.next();
 				int index = findWord(str);
 				if(index > -1) {
-					System.out.println("The word "+words[index]+" appears "+count[index]+" times");
+					System.out.println("The word "+items[index].word+" appears "+items[index].count+" times");
 				}else {
 					System.out.println("The word "+str+" does not appears");
 				}
@@ -69,23 +72,23 @@ public class Code23 {
 		
 		
 		if(index != -1) {	//found words[index] == str
-			count[index]++;
+			items[index].count++;
 		}else {
 			int i=n-1;
-			while(i>=0&&words[i].compareToIgnoreCase(str) > 0) {
-				words[i+1] = words[i];
-				count[i+1] = count[i];
+			while(i>=0&&items[i].word.compareToIgnoreCase(str) > 0) {
+				items[i+1] = items[i];
 				i--;
 			}
-			words[i+1] = str;
-			count[i+1] = 1;
+			items[i+1] = new Item();
+			items[i+1].word = str;
+			items[i+1].count = 1;
 			n++;
 		}
 	}
 	public static int findWord(String str) {
 		//이전에 인덱스로 만든 단어인지 판별
 		for(int i=0;i<n;i++) {
-			if(words[i].equals(str)) {
+			if(items[i].word.equals(str)) {
 				return i;
 			}
 		}
@@ -96,7 +99,7 @@ public class Code23 {
 		try {
 			outFile = new PrintWriter(new FileWriter(filename));
 			for(int i=0;i<n;i++) {
-				outFile.println(words[i]+" "+count[i]);
+				outFile.println(items[i].word+" "+items[i].count);
 			}
 			
 			outFile.close();
