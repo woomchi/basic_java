@@ -1,0 +1,32 @@
+상속
+: 기존 클래스와 IS-A 관계에 있는 클래스를 만들 때 기존 클래스를 물려받음
+	super 클래스(base class) : 부모 클래스
+	subclass 클래스(extended class) : 자식 클래스
+
+	형식
+	public class 클래스명 extends 부모클래스{
+		...
+	}
+
+상속과 생성자
+: 생성자가 없을 경우 자동으로 no-parameter 생성자가 만들어짐 => 기존에 객체 생성할 때 사용한 생성자
+	모든 서브 클래스 생성자는 수퍼 클래스 생성자를 호출함
+		1. super(...)로 명시적 호출하기
+		2. super가 없다면 자동으로 no-parameter 생성자가 호출함
+			=>이때 수퍼클래스에 no-parameter 생성자가 없는데 호출하기 때문에 생성자를 찾지 못하여 오류 발생
+			**다만, no-parameter 생성자를 만들어도 쓸 일이 없기 때문에 효과적인 방법이 아니라 전자를 사용함
+	해결 예시
+	public Notebook(String man, String proc, int ram, int disk, double procSpeed, double screen, double weight) {
+		super(man,proc,ram,disk,procSpeed);
+		screenSize = screen;
+		this.weight = weight;
+	}
+
+Method Overriding
+: 수퍼 클래스에 있는 메서드를 보다 나은 것으로 개선하는 것
+
+
+다형성(Polymorphism)
+: 수퍼클래스 타입의 변수가 서브 클래스 타입의 객체를 참조할 수 있음
+	**strong 타입의 예외로 수퍼클래스 멤버가 서브 클래스 객체를 가질 수 있음(반대는 불가능)
+	**자바에서는 항상 동적 바인딩(Dynamic binding)함 => 수퍼와 서브 클래스 메서드 중 서브를 호출함
