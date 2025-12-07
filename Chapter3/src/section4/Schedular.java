@@ -1,12 +1,14 @@
 package section4;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Schedular {
 
-	private int capacity = 10;
-	public Event [] events = new Event[capacity];
+//	private int capacity = 10;
+//	public Event [] events = new Event[capacity];
+	public ArrayList<Event> events = new ArrayList<>();
 	public int n = 0;
 	private Scanner kb;
 	
@@ -33,7 +35,7 @@ public class Schedular {
 				// deadline : 데드라인 전인지
 				handleShow();
 			}else if(command.equals("sort")) {
-				Arrays.sort(events,0,n);
+				Collections.sort(events);
 			}else if(command.equals("exit")) {
 				break;
 			}
@@ -44,16 +46,17 @@ public class Schedular {
 	private void handleShow() {
 		String dateString = kb.next();
 		MyDate theDate = parseDateString(dateString);
-		for(int i=0;i<n;i++) {
-			if(events[i].isRelevant(theDate)) {
-				System.out.println(events[i].toString());
+		for(int i=0;i<events.size();i++) {
+			if(events.get(i).isRelevant(theDate)) {
+				System.out.println(events.get(i).toString());
 			}
 		}
 	}
 
 	private void handleList() {
-		for(int i=0;i<n;i++) {
-			System.out.println("    "+events[i].toString());
+//		for(int i=0;i<events.size();i++) {
+		for(Event ev : events) {
+			System.out.println("    "+ev.toString());
 		}
 		
 	}
@@ -67,8 +70,7 @@ public class Schedular {
 		MyDate date = parseDateString(dateString);
 		
 		DeadlinedEvent ev = new DeadlinedEvent(title, date);	
-		events[n++] = ev;
-		
+		addEvent(ev);
 	}
 	
 	private void handleAddDurationEvent() {
@@ -83,7 +85,7 @@ public class Schedular {
 		MyDate d2 = parseDateString(end);
 		
 		DurationEvent ev = new DurationEvent(title, d1, d2);
-		events[n++] = ev;
+		addEvent(ev);
 		
 	}
 	
@@ -96,24 +98,24 @@ public class Schedular {
 		MyDate date = parseDateString(dateString);
 		
 		OneDayEvent ev = new OneDayEvent(title, date);	
-		addEvent(ev);
+		events.add(ev);
 	}
 
 	private void addEvent(Event ev) {
-		if(n >= capacity) {
-			reallocate();
-		}
-		events[n++] = ev;	//events는 Event 클래스이지만 다형성으로 OneDayEvent를 assignment함
+//		if(n >= capacity) {
+//			reallocate();
+//		}
+		events.add(ev);	//events는 Event 클래스이지만 다형성으로 OneDayEvent를 assignment함
 	}
 
-	private void reallocate() {
-		Event [] tmp = new Event[capacity *2];
-		for(int i=0;i<n;i++){
-			tmp[i] = events[i];
-		}
-		events = tmp;
-		capacity *= 2;
-	}
+//	private void reallocate() {
+//		Event [] tmp = new Event[capacity *2];
+//		for(int i=0;i<n;i++){
+//			tmp[i] = events[i];
+//		}
+//		events = tmp;
+//		capacity *= 2;
+//	}
 
 	private MyDate parseDateString(String dateString) {
 		String [] tokens = dateString.split("/");
