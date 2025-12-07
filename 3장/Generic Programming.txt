@@ -1,0 +1,43 @@
+Generic Programming (<-> Specific)
+: 데이터 형식에 의존하지 않고 하나의 값이 여러 다른 데이터 타입들을 가져 재사용성을 높이는 프로그래밍 방식
+	**T라는 가상의 타입에 의해 parameterized된 클래스로 C언어의 Template과 같음
+	**이때 type parameter는 2개 이상 가질 수 있음
+	형식
+	public class Box<T, ... >{
+		private T t;
+		public void set(T t) { this.t = t; }
+		public T get() { return t; }
+	}
+	...
+	Box<Integer> integerBox = new Box<Integer, ... >();	//객체 생성 시점에 가상의 T타입을 실제 타입으로 지정
+	integerBox.set(new Integer(10));
+	Box<Event> eventBox = new Box<Event>();
+	eventBox.set(new OneDayEvent("dinner", new MyDate(2017,2,10));
+**이전에 Object 타입을 사용했을 때 get()을 사용할 때 type casting이 필요했었음
+
+**new를 통해 객체를 생성할 때 가상의 타입은 사용할 수 없으므로 Object로 대체하고 가상의 타입으로 캐스팅함
+
+가상의 타입 비교
+: equals를 통해 비교
+	** 가상의 타입은 primitive 타입이 아니므로 ==는 사용못하지만 Object 클래스 안에 있는 equals는 어떤 타입이든 가지고 있기 때문에 사용 가능함
+
+ArrayList
+	자체 add, set, get 메서드가 있어 이를 통해 Array요소 추가, 값 변경, index 반환을 실행할 수 있음
+	Collections.sort(ArrayList명); : 이전에 Array.sort(배열명, 시작인덱스, 길이)를 대체함
+
+	**java.util은 ArrayList와 유사한 기능을 제공하는 Vector가 있는데 이는 ArrayList로 대체된 자료구조임
+	=>ArrayList가 Vector보다 더 효율적임
+		**다만, Vector 클래스는 synchronzied되어 멀티스레드가 충돌없이 Vector 객체에 엑세스할 수 있음
+	**관련 클래스 : CopyOnWriteArrayList 클래스
+	
+
+enhanced for loop
+: 이전 C언어 스타일의 for(int i=0;i<n;i++)의 반복문에서 객체지향적으로 바뀐 루프문
+	for(Event ev : events) {	//ArrayList events에 저장된 각각의 ev에 대해서 반복문
+		System.out.println("    "+ev.toString());
+	}
+	=>ArrayList가 꽉차있는 상태일때 사용해야하는 형식임
+
+	
+**T 타입 배열
+: T타입 클래스의 객체는 생성할 수 있지만 T 타입 클래스의 배열은 가질 수 없음
