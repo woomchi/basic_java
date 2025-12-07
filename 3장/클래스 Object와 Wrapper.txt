@@ -1,0 +1,40 @@
+클래스 Object
+: JAVA에서 모든 클래스의 superclass
+
+	멤버 메서드
+	1. boolean equals(Object obj) : object를 obj와 비교함
+	2. int hashCode()	: 객체의 해시 코드값을 정수형으로 반환함
+	3. String toString()	: 객체가 글로 나타낸 문자열을 반환함
+	4. Class<?> getClass() : 객체의 클래스를 식별하는 고유 클래스를 반환함
+		**다만 의도대로 작동하지 않음 => overriding으로 원하는 용도로 사용할 수 있음
+
+String toString()
+: object의 멤버 메서드로 오버라이딩하여 각 클래스에서 사용함
+	**만약 오버라이딩하지 않는다면 section3.Test@8bcc55f와 같이 패키지명.파일명@해시코드값이 출력됨
+
+boolean equals(Object obj)
+: 매개변수로 제공된 객체와 자기 자신의 동일성을 검사함
+	**만약 오버라이딩하지 않는다면 false값을 반환할 것임
+	=> 오버라이딩할 때 매개변수는 반드시 Object로 받아야하고 이를 강제 Casting해 사용할 수 있음
+
+Class class
+: 모든 클래스는 하나의 Class 객체를 가져 각 클래스에 대하여 유일함
+	**getClass()는 Object클래스가 제공하는 클래스인데 이때 Class 객체를 반환함
+
+Wrapper class
+: primitive type(기본 타입) 데이터를 객체로 만들 때 사용함
+	**Object타입은 다형성의 원리에 의해 모든 종류의 객체를 저장할 수 있지만 primitive type(기본 변수)는 저장할 수 없음
+	
+	종류
+	: Integer(기본 타입), Double(...), Character(...), Boolean(...) 등
+
+Autoboxing과 Unboxing
+: 기존에는 Wrapper 클래스로 primitive type <-> Object 간의 변환을 진행했지만 변수에 저장하는 것으로 자동 변화해줌
+	Autoboxing
+	: Object 타입 변수에 primitive 타입 값을 넣으면 자동으로 변환해줌
+
+	Autounboxing
+	: 반대로 primitive 변수에 객체(Integer 타입 등)을 저장하면 자동으로 변환해줌
+
+
+

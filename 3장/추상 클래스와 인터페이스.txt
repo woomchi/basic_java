@@ -1,0 +1,44 @@
+추상(abstract) 클래스
+: 메서드 선언만 있고 구현이 안된 클래스로 추상 메서드를 포함함
+	**객체를 만들 수 없으므로 서브 클래스 생성 용도임(abstract를 붙여 추상클래스가 된 경우)
+	=> subclass에는 필요하지만 super클래스에서는 의미없는 경우에 
+	     super 클래스와 해당 메서드를 abstract를 붙여 추상 클래스로 만듬
+ 		
+인터페이스
+: 추상 메서드만을 가진 순수한 추상 클래스
+	**static final 데이터 멤버(상수)를 가질 수 있음
+	**interface 안의 메서드는 어차피 abstract 이므로 굳이 abstract를 명시하지 않음
+	**implements: interface의 extends임
+
+**JAVA는 C언어와 달리 switch에 숫자(정수,실수)가 아닌 문자가 올 수 있음
+**System.arraycopy(기존 배열, n, 임시 배열, m, 기존 배열 길이);
+: 기존 배열 n번째에서 임시 배열 m번째로 기존 배열 길이만큼 복사
+
+
+코드 재사용
+: Generic 하지 않은(특정 메서드를 사용할 때 특정 데이터 용도로만 사용할 수 있음) 코드를 재사용하는 것
+	**Comparable 인터페이스는 JAVA API에 이미 정의되어 있음
+	만약 인터페이스를 implements한다면 해당 메서드를 재사용할 때 추상 클래스의 서브 클래스에서 정의할 수 있음
+	ex)
+	private void bubbleSort(MyComparable [] data, int size) {
+		for(int i=n-1;i>0;i--) {
+			for(int j=0;j<i;j++) {
+				if(data[j].compareTo(data[j+1]) > 0) {
+					MyComparable tmp = data[j];
+					data[j] = data[j+1];
+					data[j+1] = tmp;
+				}
+			}
+		}
+	}	
+	=> 어떤 데이터 타입의 배열이 들어오더라도 메서드 사용 가능
+
+=> 별개의 클래스에서 위의 메서드 선언해놓고 MyUtilities.bubbleSort(데이터1, 데이터2); 처럼 자유롭게 사용할 수 있음
+
+**Arrays.sort(배열 데이터, 시작 인덱스, 배열 크기);
+: 정렬할 데이터 클래스에서 Comparable을 implements한다면 자유롭게 쓸 수 있음
+	=> Generic 함
+
+추상클래스로만 이루어진 클래스와 인터페이스의 차이
+: Java에서는 다중 상속을 허용하지 않지만 하나의 클래스가 여러 개의 '인터페이스'를 implements할 수 있음
+	**Java에서는 두 개 이상의 클래스를 extends할 수 없음

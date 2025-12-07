@@ -1,0 +1,38 @@
+프로그램 설계
+과정
+1. 프로그램에서 다루어야할 데이터를 어디에 어떻게 저장할지 결정하기
+2. 코드를 실행할 프로세스 메서드를 만들고 main에 객체를 만들어 할당해 껍데기 만들기
+3. 공통점이 있는 클래스들에 대한 하나의 클래스를 만들어 공통 변수에 대해 생성자에서 super(변수)를 넣기
+	=> 공통 상위 클래스 변수로 묶어 변수를 만들고 각 객체 할당 시에 필요한 클래스로 할당하기
+	**이때 하위 클래스에선 상위 클래스 멤버를 선언하면 생성자에서 값이 전달되지 않음
+
+**문자열1.splie("문자열2") : 문자열2를 기준으로 문자열1을 쪼개어 여러 개의 문자열로 리턴함
+	**이때 문자열2는 정규 표현식(regular expression)이 들어가야함
+		공백 문자 : [ ]+ 혹은 "\\s+"
+		ex) ' . '를 인식시키기 위해 '\\.' 형식으로 입력해야함
+	ex)
+	String [] tokens = dateString.split("/");
+		for(int i=0;i<tokens.length;i++) {
+			System.out.println(tokens[i]);
+		}
+
+Integer.parseInt("문자열") : 문자열을 Int 타입으로 변환 
+
+
+배열 재할당
+: 배열을 사용하다가 선언된 배열 크기를 넘어갔을 때 추가 배열을 할당하는 것
+	**배열은 연속된 메모리 공간이므로 배열의 크기를 늘리는 것은 불가능함
+	=> 더 큰 배열을 만들어 기존 배열을 이동시킴
+
+	ex)
+	private void reallocate() {
+		Event [] tmpArray = new Event[capacity *2];
+		for(int i=0;i<n;i++){
+			tmpArray[i] = events[i];
+		}
+		events = tmpArray;
+		capacity * =2;
+	}
+
+=> 더 큰 배열로 이동 후 이렇게 사용하지 않게되는 것을 Garbage라고 함
+=> 자바에서 Garbage Collection이 자동으로 Garbage를 처리함
