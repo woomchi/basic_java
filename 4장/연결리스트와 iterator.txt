@@ -24,3 +24,46 @@ Iterator
 		public boolean hasNext();	: 다음 노드가 존재하는지 검사함(있으면 true, 없으면 false)
 		public void remove()	: 가장 최근에 next() 메서드로 반환한 노드를 삭제함
 
+
+단방향 연결 리스트의 한계
+: 단방향 순회만 가능해 어떤 노드 앞에 새로운 노드를 삽입하기 어려움
+	**이는 삭제하는 경우에도 동일함
+
+=>
+이중 연결 리스트
+:각 노드가 다음 노드와 이전 노드의 주소를 가지는 연결 리스트
+	**양방향의 순회가 가능함
+	구조
+	: head(tail, size), node(next, prev, data)
+
+	노드 삽입
+	: 다음 노드 주소 저장 -> 이전 노드 주소 저장 -> 다음 노드의 이전 노드 주소 저장 -> 이전 노드의 다음 노드 주소 저장
+
+	노드 삭제
+	: 이전 노드의 다음 노드 주소 삭제 -> 다음 노드의 이전 노드 주소 삭제
+
+
+Iterator의 한계
+: 단방향으로만 순회할 수 있어 항상 리스트의 처음에서 시작함
+	**remove 메서드는 지원하지만, add 메서드는 지원하지 않음
+	인터페이스
+	: add(E obj), hasNext(), hasPrevious(), next(), nextIndex(), previous(), previousIndex(), remove(), set(E obj)
+
+**Generic 변수는 반드시 같지 않아도 되고 static의 경우에는 non-static과 다르게 하는게 더 좋다
+
+
+Java Collection Framework
+KWLinkedList는 LinkedList의 기본 기능만을 구현한 클래스로 기존에 다양한 클래스가 이미 존재함
+
+
+Enhanced for문
+	형식
+	for(변수타입 변수 : 변수명){	
+	
+	}
+
+
+원형 리스트
+	원형 이중연결 리스트
+		**마지막 노드의 다음 노드가 첫 번째 노드가 됨
+		**반대로 첫 노드의 이전 노드가 마지막 노드가 됨
